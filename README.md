@@ -43,94 +43,139 @@ password_tool.py
 
 ---
 
-## 💻 How to Run
+## ▶️ How to Run
 
-**1️⃣ Clone or Download the Script**
+**✅ GUI Mode**
 
-    ```bash
-    
-    git clone https://github.com/yourusername/password-analyzer.git
-    cd password-analyzer
-    (Or download the .py file directly)
+ ```bash
+python password_tool.py
 
+```
+* A user-friendly window will open.
 
+* Enter your password to check its strength.
 
-**2️⃣ Run with your parameters**
+* Click “Generate Wordlist” to create a personalized wordlist.
 
+**✅ CLI Mode**
+```bash
+python password_tool.py --password "Rubal@123"
+```
 
-python3 password_tool.py \
-  --password "Heenal@123" \
-  --name "Heenal" \
-  --date "22June2004" \
-  --pet "Tommy"
-🧠 Password Strength Logic
-Strength	Criteria
-Strong	8+ characters, at least 1 uppercase, 1 lowercase, 1 digit, and 1 symbol
-Medium	8+ characters, but missing some complexity
-Weak	Less than 8 characters or lacking variety
+With wordlist:
 
-📂 Example Wordlist Entries
-python-repl
-!@#RUB4L
-!@#RUB@L
-!@#RUBaL
-!RUB4L
-!RUB@L
-!RUBaL
-#RUB4L
-#RUB@L
-#RUBaL
-123RUB4L
-123RUB@L
-123RUBaL
-12RUB4L
-12RUB@L
-12RUBaL
-1RUB4L
+```bash
+python password_tool.py --password "Rubal@123" --wordlist "rubal,jaipur,2025" --output wordlist.txt
+```
+---
+## 🧠 Password Strength Logic
 
+This tool uses two methods to analyze passwords:
 
-...
-Wordlist file: simple_wordlist.txt
+**1. Entropy-Based Calculation**
 
-Total entries: Varies depending on your inputs (typically 30–50)
+* Estimates password unpredictability.
 
-🖼️ Example Output
+* Formula:
+  
+  `entropy = length × log₂(character set size)`
 
-Password Strength: Strong
-Wordlist saved to simple_wordlist.txt with 38 entries.
-(Optional: Insert a screenshot here)
+**2. zxcvbn Library (by Dropbox)**
 
-🔧 Advanced Usage
-You can omit some parameters if desired:
+* Evaluates password strength on a scale of 0–4.
 
-Only check password strength:
+* Estimates crack time for brute-force attacks.
 
-python3 password_tool.py --password "MySecret!"
-Only generate wordlist:
+**🔍 Additional Heuristics**
+
+* Detects missing digits, symbols, cases, and length.
+  
+* Gives real-time suggestions.
+---
+
+## 📦 Output
+
+**🖥 GUI Output**
+
+* Strength Meter: Color-coded bar (Red → Green).
+
+* Crack Time: Estimated offline brute-force time.
+
+* Feedback: Recommendations to strengthen password.
+
+* Wordlist Export: Save generated words to `.txt`
 
 
-python3 password_tool.py --name "Alice" --date "14Feb1990"
-🛠 Requirements
-Python 3.x
+**🖥 CLI Output**
 
-Runs on:
+* Printed entropy, zxcvbn score, and crack time.
 
-Kali Linux
+* Saved wordlist file (if --output is used).
 
-Ubuntu/Debian
 
-MacOS
+## 🧾 Example Output
 
-Windows (using python instead of python3)
+```txt
+Analyzing password: Rubal@123
 
-No additional packages required.
+Entropy: 54.44
 
-📄 License
-This project is licensed under the MIT License.
-Feel free to use, modify, and distribute.
+zxcvbn score: 3/4
 
-✍️ Author
-Rubal Chouhdary
-🖥️ Security Researcher | Python Developer
-🔗 Kali Linux Enthusiast
+Crack Time (offline fast hash): 2 hours
+```
+---
+## Recommendations:
+
+- Add more unique characters.
+  
+- Avoid common patterns like "123".
+
+---
+
+## 📂 Example Wordlist Entries:
+
+If inputs were:  `rubal, jaipur, 2025`
+
+```
+rubal
+
+Rubal
+
+RUBAL
+
+rubal2025
+
+2025rubal
+
+rubaljaipur
+
+jaipurrubal
+
+rubal!
+
+@rubal
+
+rubal_123
+
+rubal1995
+
+rubal@jaipur
+```
+| Wordlist includes leet variants, case variations, year combinations, and special symbols.
+
+---
+
+## 📋 Requirements
+
+Install dependencies using:
+
+```
+pip install zxcvbn
+```
+
+## 💡 Author
+**Rubal Choudhary**
+
+
 
